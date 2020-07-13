@@ -12,7 +12,7 @@ function FavRouteSection(props) {
                 <Row>
                     <div>
                         <Col m={3} />
-                        <Col m={6}><FavRouteCard username={props.username} route={route} /></Col>
+                        <Col m={6}><FavRouteCard username={props.username} deleteRoute={props.deleteRoute} route={route} /></Col>
                         <Col m={3} />
                     </div>
                 </Row>

@@ -93,36 +93,28 @@ class Map extends Component {
                                 console.log('DirectionsRenderer onUnmount map: ', map)
                             }}
                         >
-                            {
-                                (
-                                    this.props.destination !== '' &&
-                                    this.props.waypoints !== [] &&
-                                    this.props.origin !== ''
-                                ) && (
-                                    <DirectionsService
-                                        // required
-                                        options={{
-                                            origin: this.props.origin,
-                                            waypoints: this.props.waypoints,
-                                            destination: this.props.destination,
-                                            travelMode: this.state.travelMode
-                                        }}
-                                        // required
-                                        callback={this.directionsCallback}
-                                        // optional
-                                        onLoad={directionsService => {
-                                            console.log('DirectionsService onLoad directionsService: ', directionsService)
-                                        }}
-                                        // optional
-                                        onUnmount={directionsService => {
-                                            console.log('DirectionsService onUnmount directionsService: ', directionsService)
-                                        }}
-                                    />
-                                )
-                            }
+                            <DirectionsService
+                                // required
+                                options={{
+                                    origin: this.props.origin,
+                                    waypoints: this.props.waypoints,
+                                    destination: this.props.destination,
+                                    travelMode: this.state.travelMode
+                                }}
+                                // required
+                                callback={this.directionsCallback}
+                                // optional
+                                onLoad={directionsService => {
+                                    console.log('DirectionsService onLoad directionsService: ', directionsService)
+                                }}
+                                // optional
+                                onUnmount={directionsService => {
+                                    console.log('DirectionsService onUnmount directionsService: ', directionsService)
+                                }}
+                            />
 
                             {
-                                this.state.response !== null && (
+                                (this.state.response !== null) && (
                                     <DirectionsRenderer
                                         // required
                                         options={{

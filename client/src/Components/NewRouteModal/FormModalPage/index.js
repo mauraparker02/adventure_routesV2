@@ -4,42 +4,34 @@ import { Button, TextInput, Textarea, Select } from "react-materialize";
 
 class FormModalPage extends Component {
     state = {
+        route_name: '',
         description: '',
         price_category: '',
         activities: '',
         origin: '',
-        waypoint1: '',
-        waypoint2: '',
+        waypoints: [],
         destination: ''
     }
 
     handleModalSubmit = () => {
         if (this.state.origin !== '' &&
-            this.state.waypoint1 !== '' &&
-            this.state.waypoint2 !== '' &&
             this.state.destination !== '') {
 
             this.props.update({
                 origin: this.state.origin,
-                waypoints: [
-                    { location: this.state.waypoint1 },
-                    { location: this.state.waypoint2 }
-                ],
+                waypoints: this.state.waypoints,
                 destination: this.state.destination,
                 modalPage: false
             });
 
             this.props.addRoute({
-                name: this.routeName.value,
+                name: this.state.route_name,
                 description: this.state.description,
                 activities: this.state.activities,
                 price_category: this.state.price_category,
                 route: {
                     origin: this.state.origin,
-                    waypoints: [
-                        { location: this.state.waypoint1 },
-                        { location: this.state.waypoint2 }
-                    ],
+                    waypoints: this.state.waypoints,
                     destination: this.state.destination
                 }
             });
@@ -50,32 +42,24 @@ class FormModalPage extends Component {
         }
     }
 
-    changeDescriptionState = ({ target: { value } }) => {
-        this.setState({ description: value });
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
     }
 
-    changePriceState = ({ target: { value } }) => {
-        this.setState({ price_category: value });
+    addNewWaypoint = e => {
+        e.preventDefault();
+        this.setState(prevState => ({ waypoints: [...prevState.waypoints, { location: '' }] }));
     }
 
-    changeOriginState = ({ target: { value } }) => {
-        this.setState({ origin: value });
+    changeWaypoint = event => {
+        const tempWaypoints = this.state.waypoints.slice();
+        tempWaypoints[event.target.id].location = event.target.value;
+        this.setState({ waypoints: tempWaypoints });
     }
-
-    changeDestinationState = ({ target: { value } }) => {
-        this.setState({ destination: value });
-    }
-
-    getRouteName = ref => {
-        this.routeName = ref;
-    }
-
-    changeWaypoint1State = ({ target: { value } }) => {
-        this.setState({ waypoint1: value });
-    }
-
-    changeWaypoint2State = ({ target: { value } }) => {
-        this.setState({ waypoint2: value });
+    
+    deleteAllWaypoints = e => {
+        e.preventDefault();
+        this.setState({ waypoints: [] });
     }
 
     render() {
@@ -87,23 +71,26 @@ class FormModalPage extends Component {
                         <TextInput
                             className='form-control'
                             label="route name"
+                            name="route_name"
                             type='text'
                             s={12}
-                            ref={this.getRouteName}
+                            onChange={this.handleChange}
+                            value={this.state.route_name}
                         />
 
                         <Textarea
                             className='form-control'
                             s={12}
                             label="route description"
+                            name="description"
                             type='text'
-                            onChange={this.changeDescriptionState}
+                            onChange={this.handleChange}
                             value={this.state.description}
                         />
 
                         <Select
                             s={6}
-                            onChange={this.changeActivityState}
+                            onChange={this.handleChange}
                             multiple={false} options={{
                                 classes: '',
                                 dropdownOptions: {
@@ -149,7 +136,7 @@ class FormModalPage extends Component {
                         <Select
                             s={6}
                             multiple={false}
-                            onChange={this.changePriceState}
+                            onChange={this.handleChange}
                             options={{
                                 classes: '',
                                 dropdownOptions: {
@@ -179,36 +166,37 @@ class FormModalPage extends Component {
                         <TextInput
                             className='form-control'
                             label="start"
+                            name="origin"
                             type='text'
                             s={12}
-                            onChange={this.changeOriginState}
+                            onChange={this.handleChange}
                             value={this.state.origin}
                         />
 
-                        <TextInput
-                            className='form-control'
-                            label="stop"
-                            type='text'
-                            s={12}
-                            onChange={this.changeWaypoint1State}
-                            value={this.state.waypoint1}
-                        />
+                        { this.state.waypoints.map((waypoint, i) => 
+                            <TextInput
+                                className='form-control'
+                                label="stop"
+                                type='text'
+                                key={i}
+                                id={i.toString()}
+                                s={12}
+                                onChange={this.changeWaypoint}
+                                value={waypoint.location}
+                            />
+                        )}
 
-                        <TextInput
-                            className='form-control'
-                            label="stop"
-                            type='text'
-                            s={12}
-                            onChange={this.changeWaypoint2State}
-                            value={this.state.waypoint2}
-                        />
+                        <Button onClick={this.addNewWaypoint}>Add Stop</Button>
+
+                        { (this.state.waypoints.length !== 0) && <Button onClick={this.deleteAllWaypoints}>Delete all waypoints</Button> }
 
                         <TextInput
                             className='form-control'
                             label="end"
+                            name="destination"
                             type='text'
                             s={12}
-                            onChange={this.changeDestinationState}
+                            onChange={this.handleChange}
                             value={this.state.destination}
                         />
                     </form>

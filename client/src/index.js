@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 
-import {LoadScript} from "@react-google-maps/api";
-
+import { LoadScript } from "@react-google-maps/api";
 
 import './index.css';
 import App from './App';

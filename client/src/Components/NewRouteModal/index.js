@@ -20,8 +20,13 @@ class NewRouteModal extends Component {
 
     render() {
         return (
-            <Modal trigger={this.props.trigger}>
-                {this.state.modalPage ? (
+            <Modal
+                trigger={this.props.trigger}
+                options={{
+                    dismissible: false
+                }}
+            >
+                {(this.state.modalPage) ? (
                     <FormModalPage
                         update={this.update}
                         addRoute={this.props.addRoute}

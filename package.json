@@ -1,7 +1,7 @@
 {
   "name": "adventure_routes",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app will map out a user’s journey from point A to point B with two stops in between. A user comes to our page and has capability to build a route and map it out visually.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
