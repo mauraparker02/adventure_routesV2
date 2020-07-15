@@ -12,13 +12,16 @@ class MapModalPage extends Component {
     render() {
         return (
             <div>
-                <h2>Map</h2>
+                <h5>{this.props.description}</h5>
+                <h4>{this.props.price_category}</h4>
+                <h5>{this.props.activities}</h5>
                 <Map
                     origin={this.props.origin}
                     waypoints={this.props.waypoints}
                     destination={this.props.destination}
                 />
-                <Button onClick={this.handleModalSubmit} waves="#orange">Back to Form</Button>
+
+                {!this.props.viewMapOnly && <Button onClick={this.handleModalSubmit} waves="#orange">Back to Form</Button>}
             </div>
         );
     }

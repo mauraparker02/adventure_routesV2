@@ -5,7 +5,7 @@ import axios from "axios";
 import SignUpNav from "./SignUpNav";
 import SignInNav from "./SignInNav";
 
-import "./style.css"
+import "./style.css";
 
 class AdventureRouteNav extends Component {
   logout = event => {
@@ -16,12 +16,17 @@ class AdventureRouteNav extends Component {
       if (response.status === 200) {
         this.props.updateUser({
           loggedIn: false,
-          username: null
+          user: {},
+          routes: []
         })
       }
     }).catch(error => {
       console.log('Logout error')
     })
+  }
+
+  componentWillUnmount() {
+
   }
 
   render() {

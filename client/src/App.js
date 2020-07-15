@@ -43,7 +43,8 @@ class App extends Component {
   }
 
   addRoute = routeObject => {
-    const id = this.state.user.id;//"5edd39c830eb27ea82204d1e";
+    const id = this.state.user.id;
+    console.log("Picture? ", routeObject.pictures);
     axios.post('/user/routes/' + id, {
       routes: [routeObject]
     })
@@ -58,11 +59,22 @@ class App extends Component {
           }));
       }
     }).catch(err => console.log(err));
+
+    axios.post('https://cors-anywhere.herokuapp.com/https://up.flickr.com/services/upload/', {
+      photo: routeObject.pictures
+    }).then(response => {
+      if (response.status === 200) {
+        console.log("Image uploaded successfully!", response);
+      }
+      else {
+        console.log("Image upload error: ", response);
+      }
+    })
   }
 
   filterRoute = event => {
     var filteredRoutes = this.state.user.routes.filter(route => 
-      route.name.toLowerCase().includes(event.target.value.toLowerCase())
+      route.name.toLowerCase().includes(event.target.value.trim().toLowerCase())
     );
     this.setState({
       search: event.target.value,
@@ -84,7 +96,7 @@ class App extends Component {
           filterRoute={this.filterRoute}
         />
         <div className="fav-routes-section"></div>
-        {this.state.loggedIn && <FavRouteSection routes={this.state.routes} deleteRoute={this.deleteRoute} username={this.state.user.username}/>}
+        <FavRouteSection routes={this.state.routes} username={this.state.user.username}/>
       </div>
     );
   }
