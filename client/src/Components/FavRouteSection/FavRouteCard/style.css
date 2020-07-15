@@ -33,8 +33,38 @@ a {
   text-align: right; 
 }
 
-/* .btn-padding {
-  margin-left: 80%;
-  margin-top: -10%;
-  
-} */
+.btn-padding {
+  float: right;
+}
+
+.card .card-image img {
+  display: block;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.card .card-content .card-title {
+  display: block;
+  line-height: 32px;
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+.card .card-content p {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+b, strong {
+  font-weight: bolder;
+  text-align: right;
+  float: right;
+  margin-bottom: 15px;
+  font-size: large;
+}

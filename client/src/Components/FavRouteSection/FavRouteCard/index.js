@@ -23,7 +23,6 @@ class FavRouteCard extends Component {
     <Card>
     <div className="card-body">
       <a href="#">
-          <div className="card-action">
             {/* <div className="card-content"> */}
               <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
               <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
@@ -31,20 +30,20 @@ class FavRouteCard extends Component {
                 <a href="#">{this.props.username}</a>
               </div>
             {/* </div> */}
-          </div>
+          {/* </div> */}
           <div className="image-wrapper">
             <div className="card-image">
               <img src="/testimgs/stock_image.jpg" alt="stock-img" />
             </div>
           </div>
           <div className="card-content">
-            <span className="card-title">{this.props.route.name}</span>
-            <b>{this.props.route.price_category}</b>
+          <div className="card-action">
+            <span className="card-title"> {this.props.route.name} <b>{this.props.route.price_category}</b> </span>
             <p>{this.props.route.description}</p>
           </div>
           <div className="card-action">
             {/* <button type="submit"><img src="/icons/heart_icon.png" alt="like" height="15px" width="auto"/></button> */}
-            <div className="card-content">
+            {/* <div className="card-content">
               <a className="btn-floating  waves-effect waves-red white">
                 <i className="material-icons">
                   <img
@@ -52,9 +51,10 @@ class FavRouteCard extends Component {
                     alt="like"
                     height="15px"
                     width="auto"
-                  />
-                </i>
-              </a>
+                  /> */}
+                {/* </i> */}
+              {/* </a>
+            </div> */}
             </div>
           </div>
       </a>
