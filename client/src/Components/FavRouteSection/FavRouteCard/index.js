@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-materialize";
+import { Modal, Button, Card, Row, Col } from "react-materialize";
 
 import Map from "../../Map";
 
@@ -10,22 +10,27 @@ class FavRouteCard extends Component {
     isClicked: false
   }
 
-  deleteRoute = () => {
-    this.props.deleteRoute(this.props.route);
-  }
+  // deleteRoute = () => {
+  //   this.props.deleteRoute(this.props.route);
+  // }
 
   routeCardTrigger = (
+    <Row>
+    <Col 
+    m={12}
+    s={12}
+    >
+    <Card>
     <div className="card-body">
       <a href="#">
-        <div className="card">
           <div className="card-action">
-            <div className="card-content">
+            {/* <div className="card-content"> */}
               <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
+              <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
               <div className="username">
                 <a href="#">{this.props.username}</a>
               </div>
-              <Button onClick={this.deleteRoute}>X</Button>
-            </div>
+            {/* </div> */}
           </div>
           <div className="image-wrapper">
             <div className="card-image">
@@ -52,9 +57,11 @@ class FavRouteCard extends Component {
               </a>
             </div>
           </div>
-        </div>
       </a>
     </div>
+    </Card>
+    </Col>
+    </Row>
   )
 
   render() {
