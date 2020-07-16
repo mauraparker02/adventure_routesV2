@@ -31,14 +31,13 @@ function Jumbotron(props) {
       </Row>
       <Row>
           <div className="flexbox">
-          {props.loggedIn &&
           <TextInput
-            label="search route"
+            label="search saved routes"
             style={ {margin: '0'}}
             m={8}
             value={props.search}
             onChange={props.filterRoute}
-          />}
+          />
           <Button className="button btnfav" waves="orange"><i><img src="/icons/heart_icon.png" alt="like" height="15px" width="auto"/></i></Button>
           <NewRouteModal routes={props.routes} addRoute={props.addRoute} loggedIn={props.loggedIn} trigger={addRouteTrigger}/>
           </div>

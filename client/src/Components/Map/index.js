@@ -12,19 +12,19 @@ class Map extends Component {
         travelMode: 'DRIVING'
     }
 
-    shouldComponentUpdate() {
-        if (this.state.renderResponse !== null) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
+    // shouldComponentUpdate() {
+    //     if (this.state.renderResponse !== null) {
+    //         return false;
+    //     }
+    //     else {
+    //         return true;
+    //     }
+    // }
 
     addDistanceAndDuration = response => {
         let tempDistance = 0;
         let tempDuration = 0;
-        response.routes[0].legs.map(leg => {
+        response.routes[0].legs.forEach(leg => {
             tempDistance += leg.distance.value;
             tempDuration += leg.duration.value;
         });

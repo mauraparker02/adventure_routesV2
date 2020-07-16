@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Card, Row, Col } from "react-materialize";
+import { Modal, Button, Card } from "react-materialize";
 
 import MapModalPage from "../../NewRouteModal/MapModalPage";
 
@@ -16,33 +16,34 @@ class FavRouteCard extends Component {
 
   render() {
     const routeCardTrigger = (
-          <Card className="route-card">
-            <div className="container card-body">
-              <a href="#">
-                      <div className="user">
-                      <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
-                      <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
-                      <div className="username">
-                        <a href="#">{this.props.username}</a>
-                      </div>
-                      </div>
-                  <div className="image-wrapper">
-                    <div className="card-image">
-                      <img src="/testimgs/stock_image.jpg" alt="stock-img" />
-                    </div>
-                  </div>
-                  <div className="card-content">
-                  <div className="card-action">
-                    <span className="card-title"> {this.props.route.name}</span>
-                    <b>{this.props.route.price_category}</b> <b>{this.props.route.activities}</b>
-                    <p>{this.props.route.description}</p>
-                  </div>
-                  <div className="card-action">
-                  </div>
-                </div>
-              </a>
+      <Card className="route-card">
+        <div className="container card-body">
+          <a href="#">
+            <div className="user">
+              <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
+              <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
+              <div className="username">
+                <a href="#">{this.props.username}</a>
+              </div>
             </div>
-          </Card>
+            <div className="image-wrapper">
+              <div className="card-image">
+                <img src="/testimgs/stock_image.jpg" alt="stock-img" />
+              </div>
+            </div>
+            <div className="card-content">
+              <div className="card-action">
+                <span className="card-title"> {this.props.route.name}</span>
+                {this.props.route.price_category !== '' && <b>{this.props.route.price_category}</b>}
+                {this.props.route.activities !== '' && <b>{this.props.route.activities}</b>}
+                <p>{this.props.route.description}</p>
+              </div>
+              <div className="card-action">
+              </div>
+            </div>
+          </a>
+        </div>
+      </Card>
     )
     return (
       <Modal

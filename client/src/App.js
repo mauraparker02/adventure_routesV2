@@ -73,18 +73,14 @@ class App extends Component {
   }
 
   filterRoute = event => {
-    console.log("Search bar: ", event.target.value);
     var filteredRoutes = this.state.user.routes.filter(route => 
       route.name.toLowerCase().includes(event.target.value.trim().toLowerCase())
     );
 
-    console.log("Correct filter: ", filteredRoutes);
-
     this.setState({
       search: event.target.value,
       routes: filteredRoutes.slice()
-    })
-    console.log("Route list state: ", this.state.routes);
+    });
   }
 
   render() {

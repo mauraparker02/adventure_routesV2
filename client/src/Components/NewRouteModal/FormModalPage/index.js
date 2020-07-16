@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, TextInput, Textarea, Select, Row } from "react-materialize";
-import ImageUploader from 'react-images-upload';
+// import ImageUploader from 'react-images-upload';
 
 import "./style.css";
 
@@ -110,7 +110,7 @@ class FormModalPage extends Component {
                             maxFileSize={5242880}
                         /> */}
 
-                        <input type="file" onChange={this.changePicture}/>
+                        {/* <input type="file" onChange={this.changePicture}/> */}
 
                         <TextInput
                             className='form-control'
@@ -265,7 +265,7 @@ class FormModalPage extends Component {
 
                 <Button onClick={this.handleModalSubmit} waves="orange">{(this.props.loggedIn) && "Save Route & "}Render Map</Button>
 
-                {this.state.error && <p class="error">Not all items filled! Route name, start, and end point is required!</p>}
+                {this.state.error && <p class="error">Not all items filled! Route name, start, and end point are required!</p>}
             </div>
         )
     }
