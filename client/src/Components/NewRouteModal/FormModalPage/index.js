@@ -26,29 +26,28 @@ class FormModalPage extends Component {
 
             let tempWaypoints = this.state.waypoints.slice();
             tempWaypoints = tempWaypoints.filter(waypoint => waypoint.location !== '');
-
-            console.log("Route object: ", this.state);
-
+            
             switch (this.state.activities) {
-                case 'Music':
-                    this.setState({picture: "/testimgs/Music.jpg"});
+                case "Music":
+                    this.state.picture = "/testimgs/Music.jpg";
                     break;
-                case 'Food/Drink':
-                    this.setState({picture: "/testimgs/Food-drink.jpg"});
+                case "Food/Drink":
+                    this.state.picture = "/testimgs/Food-drink.jpg";
                     break;
-                case 'Sports':
-                    this.setState({picture: "/testimgs/sports.jpg"});
+                case "Sports":
+                    this.state.picture = "/testimgs/sports.jpg";
                     break;
-                case 'Comedy':
-                    this.setState({picture: "/testimgs/comedy.jpg"});
+                case "Comedy":
+                    this.state.picture = "/testimgs/comedy.jpg";
                     break;
-                case 'Movies':
-                    this.setState({picture: "/testimgs/Movies.jpg"});
+                case "Movies":
+                    this.state.picture = "/testimgs/Movies.jpg"
                     break;
                 default:
                     break;
-
             }
+
+            console.log("Route object: ", this.state);
 
             console.log(this.state.picture);
 
