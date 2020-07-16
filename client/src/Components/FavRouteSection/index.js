@@ -8,7 +8,7 @@ import './style.css'
 function FavRouteSection(props) {
     return (
         <Row>
-            <div class="route-cards">
+            <div className="route-cards">
                 {props.routes.map((route, i) =>
                     <Col m={6} s={12} l={4} xl={3} className="route-col">
                         <FavRouteCard username={props.username} deleteRoute={props.deleteRoute} route={route} />

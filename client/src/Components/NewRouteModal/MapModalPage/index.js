@@ -13,8 +13,8 @@ class MapModalPage extends Component {
         return (
             <div>
                 <h5>{this.props.description}</h5>
-                {this.props.price_category && <b>{this.props.price_category}</b>}
-                {this.props.activities && <b>{this.props.activities}</b>}
+                <h5>{(this.props.price_category) && <b>{this.props.price_category}</b>} {this.props.activities && <b>{this.props.activities}</b>}</h5>
+
                 <Map
                     origin={this.props.origin}
                     waypoints={this.props.waypoints}
