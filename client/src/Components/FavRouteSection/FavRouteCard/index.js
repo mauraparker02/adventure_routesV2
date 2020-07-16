@@ -28,7 +28,7 @@ class FavRouteCard extends Component {
             </div>
             <div className="image-wrapper">
               <div className="card-image">
-                <img src="/testimgs/stock_image.jpg" alt="stock-img" />
+                <img src={this.props.route.picture} alt="stock-img" />
               </div>
             </div>
             <div className="card-content">

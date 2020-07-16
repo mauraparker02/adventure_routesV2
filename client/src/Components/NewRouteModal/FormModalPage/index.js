@@ -7,7 +7,7 @@ import "./style.css";
 
 class FormModalPage extends Component {
     state = {
-        picture: null,
+        picture: '',
         name: '',
         description: '',
         price_category: '',
@@ -20,6 +20,7 @@ class FormModalPage extends Component {
 
     handleModalSubmit = () => {
         if (this.state.name.trim() !== '' &&
+            this.state.activities !== '' &&
             this.state.origin.trim() !== '' &&
             this.state.destination.trim() !== '') {
 
@@ -28,7 +29,31 @@ class FormModalPage extends Component {
 
             console.log("Route object: ", this.state);
 
+            switch (this.state.activities) {
+                case 'Music':
+                    this.setState({picture: "/testimgs/Music.jpg"});
+                    break;
+                case 'Food/Drink':
+                    this.setState({picture: "/testimgs/Food-drink.jpg"});
+                    break;
+                case 'Sports':
+                    this.setState({picture: "/testimgs/sports.jpg"});
+                    break;
+                case 'Comedy':
+                    this.setState({picture: "/testimgs/comedy.jpg"});
+                    break;
+                case 'Movies':
+                    this.setState({picture: "/testimgs/Movies.jpg"});
+                    break;
+                default:
+                    break;
+
+            }
+
+            console.log(this.state.picture);
+
             this.props.update({
+                picture: this.state.picture,
                 name: this.state.name,
                 description: this.state.description,
                 price_category: this.state.price_category,
@@ -160,10 +185,7 @@ class FormModalPage extends Component {
                                 disabled
                                 value=""
                             >
-                                Pick activity categories
-                            </option>
-                            <option value="N/A">
-                                N/A
+                                Pick activity category
                             </option>
                             <option value="Music">
                                 Music
@@ -177,8 +199,8 @@ class FormModalPage extends Component {
                             <option value="Comedy">
                                 Comedy
                             </option>
-                            <option value="Movie">
-                                Movie
+                            <option value="Movies">
+                                Movies
                             </option>
                         </Select>
 
@@ -265,7 +287,7 @@ class FormModalPage extends Component {
 
                 <Button onClick={this.handleModalSubmit} waves="orange">{(this.props.loggedIn) && "Save Route & "}Render Map</Button>
 
-                {this.state.error && <p class="error">Not all items filled! Route name, start, and end point are required!</p>}
+                {this.state.error && <p class="error">Not all items filled! Route name, activity, start, and end point are required!</p>}
             </div>
         )
     }
