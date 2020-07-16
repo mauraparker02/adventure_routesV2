@@ -1,4 +1,5 @@
 .route-cards {
     display: flex;
     flex-wrap: wrap;
+    height: 0px;
 }
