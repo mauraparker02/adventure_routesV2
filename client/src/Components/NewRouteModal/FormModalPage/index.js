@@ -1,49 +1,71 @@
 import React, { Component } from "react";
-import { Button, TextInput, Textarea, Select } from "react-materialize";
+import { Button, TextInput, Textarea, Select, Row } from "react-materialize";
+import ImageUploader from 'react-images-upload';
+
+import "./style.css";
 
 
 class FormModalPage extends Component {
     state = {
-        route_name: '',
+        picture: null,
+        name: '',
         description: '',
         price_category: '',
         activities: '',
         origin: '',
         waypoints: [],
-        destination: ''
+        destination: '',
+        error: false
     }
 
     handleModalSubmit = () => {
-        if (this.state.origin !== '' &&
-            this.state.destination !== '') {
+        if (this.state.name.trim() !== '' &&
+            this.state.origin.trim() !== '' &&
+            this.state.destination.trim() !== '') {
+
+            let tempWaypoints = this.state.waypoints.slice();
+            tempWaypoints = tempWaypoints.filter(waypoint => waypoint.location !== '');
+
+            console.log("Route object: ", this.state);
 
             this.props.update({
+                name: this.state.name,
+                description: this.state.description,
+                price_category: this.state.price_category,
+                activities: this.state.activities,
                 origin: this.state.origin,
-                waypoints: this.state.waypoints,
+                waypoints: tempWaypoints,
                 destination: this.state.destination,
                 modalPage: false
             });
 
-            this.props.addRoute({
-                name: this.state.route_name,
-                description: this.state.description,
-                activities: this.state.activities,
-                price_category: this.state.price_category,
-                route: {
-                    origin: this.state.origin,
-                    waypoints: this.state.waypoints,
-                    destination: this.state.destination
-                }
-            });
+            if (this.props.loggedIn) {
+                this.props.addRoute({
+                    picture: this.state.picture,
+                    name: this.state.name,
+                    description: this.state.description,
+                    activities: this.state.activities,
+                    price_category: this.state.price_category,
+                    route: {
+                        origin: this.state.origin,
+                        waypoints: tempWaypoints,
+                        destination: this.state.destination
+                    }
+                });
+            }
         }
-        
+
         else {
-            console.log("Not all locations added!");
+            this.setState({ error: true });
         }
     }
 
-    handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    changePicture = e => {
+        this.setState({ picture: e.target.files[0] });
     }
 
     addNewWaypoint = e => {
@@ -51,12 +73,19 @@ class FormModalPage extends Component {
         this.setState(prevState => ({ waypoints: [...prevState.waypoints, { location: '' }] }));
     }
 
-    changeWaypoint = event => {
+    changeWaypoint = e => {
         const tempWaypoints = this.state.waypoints.slice();
-        tempWaypoints[event.target.id].location = event.target.value;
+        tempWaypoints[e.target.id].location = e.target.value;
         this.setState({ waypoints: tempWaypoints });
     }
-    
+
+    deleteWaypoint = e => {
+        e.preventDefault();
+        const tempWaypoints = this.state.waypoints.slice();
+        tempWaypoints.splice(e.target.id, 1);
+        this.setState({ waypoints: tempWaypoints });
+    }
+
     deleteAllWaypoints = e => {
         e.preventDefault();
         this.setState({ waypoints: [] });
@@ -65,23 +94,38 @@ class FormModalPage extends Component {
     render() {
         return (
             <div>
-                <h2>New Route</h2>
                 <div className='row'>
                     <form className="col s12">
+                        {/* <Row>
+
+                            <Button>Upload Image</Button>
+                        </Row> */}
+                        {/* <ImageUploader
+                            withIcon={true}
+                            withPreview={true}
+                            singleImage={true}
+                            buttonText='Choose images'
+                            onChange={this.onDrop}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                            maxFileSize={5242880}
+                        /> */}
+
+                        <input type="file" onChange={this.changePicture}/>
+
                         <TextInput
                             className='form-control'
-                            label="route name"
-                            name="route_name"
+                            label="name"
+                            name="name"
                             type='text'
                             s={12}
                             onChange={this.handleChange}
-                            value={this.state.route_name}
+                            value={this.state.name}
                         />
 
                         <Textarea
                             className='form-control'
                             s={12}
-                            label="route description"
+                            label="description"
                             name="description"
                             type='text'
                             onChange={this.handleChange}
@@ -91,7 +135,9 @@ class FormModalPage extends Component {
                         <Select
                             s={6}
                             onChange={this.handleChange}
-                            multiple={false} options={{
+                            multiple={false}
+                            name="activities"
+                            options={{
                                 classes: '',
                                 dropdownOptions: {
                                     alignment: 'left',
@@ -116,6 +162,9 @@ class FormModalPage extends Component {
                             >
                                 Pick activity categories
                             </option>
+                            <option value="N/A">
+                                N/A
+                            </option>
                             <option value="Music">
                                 Music
                             </option>
@@ -137,6 +186,7 @@ class FormModalPage extends Component {
                             s={6}
                             multiple={false}
                             onChange={this.handleChange}
+                            name="price_category"
                             options={{
                                 classes: '',
                                 dropdownOptions: {
@@ -154,9 +204,15 @@ class FormModalPage extends Component {
                                     outDuration: 250
                                 }
                             }}
-                            value='free'
+                            value=''
                         >
-                            <option value="free">Pick price category</option>
+                            <option
+                                disabled
+                                value=""
+                            >
+                                Pick price category
+                            </option>
+                            <option value="free">Free</option>
                             <option value="$">$</option>
                             <option value="$$">$$</option>
                             <option value="$$$">$$$</option>
@@ -173,22 +229,27 @@ class FormModalPage extends Component {
                             value={this.state.origin}
                         />
 
-                        { this.state.waypoints.map((waypoint, i) => 
-                            <TextInput
-                                className='form-control'
-                                label="stop"
-                                type='text'
-                                key={i}
-                                id={i.toString()}
-                                s={12}
-                                onChange={this.changeWaypoint}
-                                value={waypoint.location}
-                            />
-                        )}
+                        {this.state.waypoints.map((waypoint, i) => (
+                            <div>
+                                <TextInput
+                                    className='form-control'
+                                    label="stop"
+                                    type='text'
+                                    key={i}
+                                    id={i.toString()}
+                                    s={12}
+                                    onChange={this.changeWaypoint}
+                                    value={waypoint.location}
+                                >
+                                    <Button onClick={this.deleteWaypoint} id={i.toString()}>Delete Stop</Button>
+                                </TextInput>
+                            </div>
+                        ))}
 
-                        <Button onClick={this.addNewWaypoint}>Add Stop</Button>
-
-                        { (this.state.waypoints.length !== 0) && <Button onClick={this.deleteAllWaypoints}>Delete all waypoints</Button> }
+                        <Row>
+                            <Button onClick={this.addNewWaypoint}>New Stop</Button>
+                            {(this.state.waypoints.length !== 0) && <Button onClick={this.deleteAllWaypoints}>Delete All Stops</Button>}
+                        </Row>
 
                         <TextInput
                             className='form-control'
@@ -202,9 +263,9 @@ class FormModalPage extends Component {
                     </form>
                 </div>
 
-                <Button onClick={this.handleModalSubmit} waves="orange">Render Map</Button>
+                <Button onClick={this.handleModalSubmit} waves="orange">{(this.props.loggedIn) && "Save Route & "}Render Map</Button>
 
-                <p className="error"></p>
+                {this.state.error && <p class="error">Not all items filled! Route name, start, and end point is required!</p>}
             </div>
         )
     }

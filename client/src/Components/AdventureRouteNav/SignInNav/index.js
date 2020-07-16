@@ -9,19 +9,19 @@ class SignInNav extends Component {
         redirectTo: null
     }
     
-    handleChange = event => {
+    handleChange = e => {
         this.setState({
-            [event.target.name]: event.target.value
+            [e.target.name]: e.target.value
         });
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = e => {
+        e.preventDefault();
 
         axios
             .post('/user/login', {
-                username: this.state.username,
-                password: this.state.password
+                username: this.state.username.trim(),
+                password: this.state.password.trim()
             })
             .then(response => {
                 console.log('login response: ')
