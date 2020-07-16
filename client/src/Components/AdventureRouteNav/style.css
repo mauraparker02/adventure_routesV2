@@ -22,3 +22,23 @@
     right: auto;
   }
 }
+
+button.btn.modal-close {
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.modal h1, .modal h2, .modal h3, .modal h4 {
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+.modal .modal-content {
+  padding: 40px;
+}
+
+h5 {
+  font-size: 1.64rem;
+  line-height: 110%;
+  margin: 20px;
+}

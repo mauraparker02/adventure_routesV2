@@ -23,8 +23,8 @@ function Jumbotron(props) {
         <Col m={8} s={12}>
           <h1 className="welcome">
             {props.loggedIn ?
-              `${props.username}, click on the + button to add a new route!` :
-              "Welcome, click on the + button to test your route! Sign in/up to save your routes!"}
+              `Hi ${props.username}! click on the + button to create a new route.` :
+              "Welcome, Adventure Routes will map out a user’s journey from point A to point B with as many stops needed inbetween. Test out building a route on a map... to start click on the + button!"}
           </h1>
         </Col>
         <Col m={2} s={12}></Col>
@@ -39,7 +39,7 @@ function Jumbotron(props) {
             value={props.search}
             onChange={props.filterRoute}
           />}
-          <Button className="button btnfav" waves="orange"><i><img src="/icons/heart_icon.png" alt="like" height="15px" width="auto"/></i></Button>
+          {/* <Button className="button btnfav" waves="orange"><i><img src="/icons/heart_icon.png" alt="like" height="15px" width="auto"/></i></Button> */}
           <NewRouteModal routes={props.routes} addRoute={props.addRoute} loggedIn={props.loggedIn} trigger={addRouteTrigger}/>
           </div>
       </Row>

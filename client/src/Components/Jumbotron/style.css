@@ -50,9 +50,12 @@ textarea {
     text-decoration: underline;
     
 }
-.welcome{
+.welcome {
+    font-size: x-large;
     font-weight: bolder;
     text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
 }
     
 .btn:hover, .btn-large:hover, .btn-small:hover {
