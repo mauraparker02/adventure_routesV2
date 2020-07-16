@@ -1,4 +1,14 @@
 .route-cards {
     display: flex;
     flex-wrap: wrap;
+    background-color: #f9f9f9;
+}; 
+
+.fav-routes-section {
+    background-color: #f9f9f9;
+    height: 50px;
+}
+
+html {
+    background-color: #f9f9f9;
 }
