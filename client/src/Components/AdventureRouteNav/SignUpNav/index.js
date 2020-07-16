@@ -12,13 +12,10 @@ class SignUpNav extends Component {
 		redirectTo: null
 	}
 
-	handleChange = event => {
-		this.setState({
-			[event.target.name]: event.target.value
-		})
-	}
-	handleSubmit = event => {
-		event.preventDefault();
+	handleChange = e => this.setState({[e.target.name]: e.target.value});
+	
+	handleSubmit = e => {
+		e.preventDefault();
 
 		//request to server to add a new username/password
 		axios.post('/user/', {
