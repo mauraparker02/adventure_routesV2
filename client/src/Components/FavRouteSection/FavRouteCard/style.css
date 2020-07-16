@@ -38,3 +38,17 @@ a {
   margin-top: -10%;
   
 } */
+
+b, strong {
+  font-weight: 700;
+  text-align: right;
+  display: block;
+  background-color: lightgrey;
+  border-color: lightgrey;
+  border-radius: 10px;
+  float: right;
+  color: white;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-size: large;
+}
