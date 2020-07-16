@@ -14,47 +14,39 @@ class FavRouteCard extends Component {
   //   this.props.deleteRoute(this.props.route);
   // }
 
-  routeCardTrigger = (
-    <Row>
-      <Col 
-        m={12}
-        s={12}
-      >
-        <Card>
-          <div className="card-body">
-            <a href="#">
-                    <div className="user">
-                    <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
-                    <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
-                    <div className="username">
-                      <a href="#">{this.props.username}</a>
+  render() {
+    const routeCardTrigger = (
+          <Card className="route-card">
+            <div className="container card-body">
+              <a href="#">
+                      <div className="user">
+                      <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
+                      <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
+                      <div className="username">
+                        <a href="#">{this.props.username}</a>
+                      </div>
+                      </div>
+                  <div className="image-wrapper">
+                    <div className="card-image">
+                      <img src="/testimgs/stock_image.jpg" alt="stock-img" />
                     </div>
-                    </div>
-                <div className="image-wrapper">
-                  <div className="card-image">
-                    <img src="/testimgs/stock_image.jpg" alt="stock-img" />
+                  </div>
+                  <div className="card-content">
+                  <div className="card-action">
+                    <span className="card-title"> {this.props.route.name} <b>{this.props.route.price_category}</b> <b>{this.props.route.activities}</b></span>
+                    <p>{this.props.route.description}</p>
+                  </div>
+                  <div className="card-action">
                   </div>
                 </div>
-                <div className="card-content">
-                <div className="card-action">
-                  <span className="card-title"> {this.props.route.name} <b>{this.props.route.price_category}</b> </span>
-                  <p>{this.props.route.description}</p>
-                </div>
-                <div className="card-action">
-                </div>
-              </div>
-            </a>
-          </div>
-        </Card>
-      </Col>
-    </Row>
-  )
-
-  render() {
+              </a>
+            </div>
+          </Card>
+    )
     return (
       <Modal
         header={this.props.route.name}
-        trigger={this.routeCardTrigger}
+        trigger={routeCardTrigger}
         options={{
           onOpenStart: () => this.setState({ isClicked: true }),
           onCloseEnd: () => this.setState({ isClicked: false })

@@ -1,4 +1,4 @@
-.fav-routes-section{
-    padding-top: 100px; 
-    height: 100px;
+.route-cards {
+    display: flex;
+    flex-wrap: wrap;
 }

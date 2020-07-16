@@ -1,6 +1,17 @@
 .card-body{
   background-image: black;
+  flex-direction: column;
+  width: 100%;
+  flex: 1 0 auto;
+  position: absolute;
 }
+
+.container {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
 .image-frame {
     border-top: -20px solid white;
     border-bottom: 20px solid white;
