@@ -37,13 +37,14 @@ class FavRouteCard extends Component {
                 </div>
                 <div className="card-content">
                 <div className="card-action">
-                  <span className="card-title"> {this.props.route.name} <b>{this.props.route.price_category}</b> </span>
+                  <span className="card-title"> {this.props.route.name}  <b>{this.props.route.price_category}</b></span>
                   <p>{this.props.route.description}</p>
                 </div>
                 <div className="card-action">
                 </div>
               </div>
             </a>
+            
           </div>
         </Card>
       </Col>

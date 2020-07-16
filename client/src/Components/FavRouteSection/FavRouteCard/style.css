@@ -78,8 +78,8 @@ b, strong {
 }
 
 .card .card-content p {
-  margin: 0;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
+  margin-top: 30px !important; 
 }
 
 b, strong {
