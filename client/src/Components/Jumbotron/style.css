@@ -16,6 +16,7 @@
 #jumbotron {
     font-family: Arial, Helvetica, sans-serif ;
     padding: 20px;
+    padding-bottom: 500px; 
     color: white;
     background-image: url(/icons/background.png);
     background-repeat: no-repeat; 

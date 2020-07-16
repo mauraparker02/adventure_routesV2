@@ -21,7 +21,7 @@ class FavRouteCard extends Component {
           <a href="#">
             <div className="user">
               <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
-              <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
+              {/* <Button className="btn-padding" onClick={this.deleteRoute}>X</Button> */}
               <div className="username">
                 <a href="#">{this.props.username}</a>
               </div>
