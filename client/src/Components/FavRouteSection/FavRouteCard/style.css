@@ -50,17 +50,7 @@ a {
   
 } */
 
-b, strong {
-  font-weight: 700;
-  text-align: right;
-  display: block;
-  background-color: lightgrey;
-  border-color: lightgrey;
-  border-radius: 10px;
-  float: right;
-  color: white;
-  padding: 5px;
-}
+
 
 .btn-padding {
   float: right;
@@ -94,11 +84,13 @@ b, strong {
 }
 
 b, strong {
-  font-weight: bolder;
+  font-weight: 700;
   text-align: right;
-  float: right;
-  margin-bottom: 15px;
-  font-size: large;
+  background-color: orange;
+  border-color: orange;
+  border-radius: 10px;
+  color: white;
+  padding: 5px;
 }
 
 .user {
