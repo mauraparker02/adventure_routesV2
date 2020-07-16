@@ -23,10 +23,12 @@ class FavRouteCard extends Component {
         <Card>
           <div className="card-body">
             <a href="#">
+                    <div className="user">
                     <img src="/icons/empty_user.png" alt="user-icon" height="35px" width="auto" />
                     <Button className="btn-padding" onClick={this.deleteRoute}>X</Button>
                     <div className="username">
                       <a href="#">{this.props.username}</a>
+                    </div>
                     </div>
                 <div className="image-wrapper">
                   <div className="card-image">

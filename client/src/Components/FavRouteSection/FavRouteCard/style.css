@@ -33,9 +33,30 @@ a {
   text-align: right; 
 }
 
+/* .btn-padding {
+  margin-left: 80%;
+  margin-top: -10%;
+  
+} */
+
+b, strong {
+  font-weight: 700;
+  text-align: right;
+  display: block;
+  background-color: lightgrey;
+  border-color: lightgrey;
+  border-radius: 10px;
+  float: right;
+  color: white;
+  padding: 5px;
+}
+
 .btn-padding {
   float: right;
-}
+  background-color: transparent;
+    color: lightgrey;
+    border-radius: 10px;
+}; 
 
 .card .card-image img {
   display: block;
@@ -46,7 +67,7 @@ a {
   top: 0;
   bottom: 0;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .card .card-content .card-title {
@@ -67,4 +88,8 @@ b, strong {
   float: right;
   margin-bottom: 15px;
   font-size: large;
+}
+
+.user {
+  margin-bottom: 15px;
 }
