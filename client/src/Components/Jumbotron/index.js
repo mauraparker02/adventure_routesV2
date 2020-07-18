@@ -36,7 +36,7 @@ class Jumbotron extends Component {
         <Col m={2} s={12}></Col>
         <Col m={8} s={12}>
           <div className="bigIcon">
-              <img src="/icons/Adv.png" alt="adventure-route-cover-img"></img>
+              <img src="/icons/adventure_routes.png" alt="adventure-route-cover-img"></img>
           </div>
         </Col>
         <Col m={2} s={12}></Col>

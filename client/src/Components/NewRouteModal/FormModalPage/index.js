@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, TextInput, Textarea, Select, Row } from "react-materialize";
+import { Button, TextInput, Textarea, Select, Row, Col } from "react-materialize";
 // import ImageUploader from 'react-images-upload';
 
 import "./style.css";
@@ -118,171 +118,171 @@ class FormModalPage extends Component {
     render() {
         return (
             <div>
-                <div className='row'>
-                    <form className="col s12">
-                        {/* <Row>
+                <Row>
+                    <Col s={12}>
+                        <form>
+                            {/* <Row>
 
-                            <Button>Upload Image</Button>
-                        </Row> */}
-                        {/* <ImageUploader
-                            withIcon={true}
-                            withPreview={true}
-                            singleImage={true}
-                            buttonText='Choose images'
-                            onChange={this.onDrop}
-                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                            maxFileSize={5242880}
-                        /> */}
+                                <Button>Upload Image</Button>
+                            </Row> */}
+                            {/* <ImageUploader
+                                withIcon={true}
+                                withPreview={true}
+                                singleImage={true}
+                                buttonText='Choose images'
+                                onChange={this.onDrop}
+                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                maxFileSize={5242880}
+                            /> */}
 
-                        {/* <input type="file" onChange={this.changePicture}/> */}
+                            {/* <input type="file" onChange={this.changePicture}/> */}
 
-                        <TextInput
-                            className='form-control'
-                            label="name"
-                            name="name"
-                            type='text'
-                            s={12}
-                            onChange={this.handleChange}
-                            value={this.state.name}
-                        />
+                            <TextInput
+                                className='form-control'
+                                label="name"
+                                name="name"
+                                type='text'
+                                s={12}
+                                onChange={this.handleChange}
+                                value={this.state.name}
+                            />
 
-                        <Textarea
-                            className='form-control'
-                            s={12}
-                            label="description"
-                            name="description"
-                            type='text'
-                            onChange={this.handleChange}
-                            value={this.state.description}
-                        />
+                            <Textarea
+                                className='form-control'
+                                s={12}
+                                label="description"
+                                name="description"
+                                type='text'
+                                onChange={this.handleChange}
+                                value={this.state.description}
+                            />
 
-                        <Select
-                            s={6}
-                            onChange={this.handleChange}
-                            multiple={false}
-                            name="activities"
-                            options={{
-                                classes: '',
-                                dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    onCloseEnd: null,
-                                    onCloseStart: null,
-                                    onOpenEnd: null,
-                                    onOpenStart: null,
-                                    outDuration: 250
-                                }
-                            }}
-                            value=''
-                        >
-                            <option
-                                disabled
-                                value=""
+                            <Select
+                                s={6}
+                                onChange={this.handleChange}
+                                multiple={false}
+                                name="activities"
+                                options={{
+                                    classes: '',
+                                    dropdownOptions: {
+                                        alignment: 'left',
+                                        autoTrigger: true,
+                                        closeOnClick: true,
+                                        constrainWidth: true,
+                                        coverTrigger: true,
+                                        hover: false,
+                                        inDuration: 150,
+                                        onCloseEnd: null,
+                                        onCloseStart: null,
+                                        onOpenEnd: null,
+                                        onOpenStart: null,
+                                        outDuration: 250
+                                    }
+                                }}
+                                value=''
                             >
-                                Pick activity category
-                            </option>
-                            <option value="Music">
-                                Music
-                            </option>
-                            <option value="Food/Drink">
-                                Food/Drink
-                            </option>
-                            <option value="Sports">
-                                Sports
-                            </option>
-                            <option value="Comedy">
-                                Comedy
-                            </option>
-                            <option value="Movies">
-                                Movies
-                            </option>
-                        </Select>
-
-                        <Select
-                            s={6}
-                            multiple={false}
-                            onChange={this.handleChange}
-                            name="price_category"
-                            options={{
-                                classes: '',
-                                dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    onCloseEnd: null,
-                                    onCloseStart: null,
-                                    onOpenEnd: null,
-                                    onOpenStart: null,
-                                    outDuration: 250
-                                }
-                            }}
-                            value=''
-                        >
-                            <option
-                                disabled
-                                value=""
-                            >
-                                Pick price category
-                            </option>
-                            <option value="free">Free</option>
-                            <option value="$">$</option>
-                            <option value="$$">$$</option>
-                            <option value="$$$">$$$</option>
-                            <option value="$$$$">$$$$</option>
-                        </Select>
-
-                        <TextInput
-                            className='form-control'
-                            label="start"
-                            name="origin"
-                            type='text'
-                            s={12}
-                            onChange={this.handleChange}
-                            value={this.state.origin}
-                        />
-
-                        {this.state.waypoints.map((waypoint, i) => (
-                            <div>
-                                <TextInput
-                                    className='form-control'
-                                    label="stop"
-                                    type='text'
-                                    key={i}
-                                    id={i.toString()}
-                                    s={12}
-                                    onChange={this.changeWaypoint}
-                                    value={waypoint.location}
+                                <option
+                                    disabled
+                                    value=""
                                 >
-                                    <Button onClick={this.deleteWaypoint} id={i.toString()}>Delete Stop</Button>
-                                </TextInput>
-                            </div>
-                        ))}
+                                    Pick activity category
+                                </option>
+                                <option value="Music">
+                                    Music
+                                </option>
+                                <option value="Food/Drink">
+                                    Food/Drink
+                                </option>
+                                <option value="Sports">
+                                    Sports
+                                </option>
+                                <option value="Comedy">
+                                    Comedy
+                                </option>
+                                <option value="Movies">
+                                    Movies
+                                </option>
+                            </Select>
 
-                        <Row>
+                            <Select
+                                s={6}
+                                multiple={false}
+                                onChange={this.handleChange}
+                                name="price_category"
+                                options={{
+                                    classes: '',
+                                    dropdownOptions: {
+                                        alignment: 'left',
+                                        autoTrigger: true,
+                                        closeOnClick: true,
+                                        constrainWidth: true,
+                                        coverTrigger: true,
+                                        hover: false,
+                                        inDuration: 150,
+                                        onCloseEnd: null,
+                                        onCloseStart: null,
+                                        onOpenEnd: null,
+                                        onOpenStart: null,
+                                        outDuration: 250
+                                    }
+                                }}
+                                value=''
+                            >
+                                <option
+                                    disabled
+                                    value=""
+                                >
+                                    Pick price category
+                                </option>
+                                <option value="free">Free</option>
+                                <option value="$">$</option>
+                                <option value="$$">$$</option>
+                                <option value="$$$">$$$</option>
+                                <option value="$$$$">$$$$</option>
+                            </Select>
+
+                            <TextInput
+                                className='form-control'
+                                label="start"
+                                name="origin"
+                                type='text'
+                                s={12}
+                                onChange={this.handleChange}
+                                value={this.state.origin}
+                            />
+
+                            {this.state.waypoints.map((waypoint, i) => (
+                                <div>
+                                    <TextInput
+                                        className='form-control'
+                                        label="stop"
+                                        type='text'
+                                        key={i}
+                                        id={i.toString()}
+                                        s={12}
+                                        onChange={this.changeWaypoint}
+                                        value={waypoint.location}
+                                    >
+                                        <Button onClick={this.deleteWaypoint} id={i.toString()}>Delete Stop</Button>
+                                    </TextInput>
+                                </div>
+                            ))}
+
                             <Button onClick={this.addNewWaypoint}>New Stop</Button>
                             {(this.state.waypoints.length !== 0) && <Button onClick={this.deleteAllWaypoints}>Delete All Stops</Button>}
-                        </Row>
 
-                        <TextInput
-                            className='form-control'
-                            label="end"
-                            name="destination"
-                            type='text'
-                            s={12}
-                            onChange={this.handleChange}
-                            value={this.state.destination}
-                        />
-                    </form>
-                </div>
+                            <TextInput
+                                className='form-control'
+                                label="end"
+                                name="destination"
+                                type='text'
+                                s={12}
+                                onChange={this.handleChange}
+                                value={this.state.destination}
+                            />
+                        </form>
+                    </Col>
+                </Row>
 
                 <Button onClick={this.handleModalSubmit} waves="orange">{(this.props.loggedIn) && "Save Route & "}Render Map</Button>
 
