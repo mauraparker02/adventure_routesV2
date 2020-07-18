@@ -50,6 +50,7 @@ class FavRouteCard extends Component {
         header={this.props.route.name}
         trigger={routeCardTrigger}
         options={{
+          dismissible: true,
           onOpenStart: () => this.setState({ isClicked: true }),
           onCloseEnd: () => this.setState({ isClicked: false })
         }}
