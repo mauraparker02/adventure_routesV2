@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
-import { Select } from "react-materialize";
-import { GoogleMap, DirectionsRenderer, DirectionsService, LoadScript } from "@react-google-maps/api";
+import { Select, Switch, Checkbox } from "react-materialize";
+import {
+    GoogleMap,
+    DirectionsRenderer,
+    DirectionsService,
+    TrafficLayer,
+    TransitLayer,
+    LoadScript
+} from "@react-google-maps/api";
 
 class Map extends Component {
     state = {
         response: null,
-        renderResponse: null,
-        totalDistance: 0, // Pure value is in meters
-        totalDuration: 0, // Pure value is in seconds
+        directionSummary: '',
+        trafficLayer: false,
+        // transitLayer: false,
+        totalDistance: 0, // Value is in meters
+        totalDuration: 0, // Value is in seconds
         renderCount: 0,
         travelMode: 'DRIVING'
     }
 
     // shouldComponentUpdate() {
-    //     if (this.state.renderResponse !== null) {
+    //     if (this.state.response !== null) {
     //         return false;
     //     }
     //     else {
@@ -21,7 +30,7 @@ class Map extends Component {
     //     }
     // }
 
-    addDistanceAndDuration = response => {
+    getRouteInfo = response => {
         let tempDistance = 0;
         let tempDuration = 0;
         response.routes[0].legs.forEach(leg => {
@@ -31,17 +40,24 @@ class Map extends Component {
 
         this.setState({
             totalDistance: tempDistance,
-            totalDuration: tempDuration
+            totalDuration: tempDuration,
+            directionSummary: response.routes[0].summary
         });
-        console.log("Total distance: ", this.state.totalDistance, "m  (", Math.round(this.state.totalDistance * 0.00062137), "mi )");
-        console.log("Total duration: ", this.state.totalDuration, "s  (", this.state.totalDuration / 60 / 60, "h ");
     }
+
+    switchTrafficLayer = () => {
+        this.setState({ trafficLayer: !this.state.trafficLayer });
+    }
+
+    // switchTransitLayer = () => {
+    //     this.setState({ transitLayer: !this.state.transitLayer });
+    // }
 
     directionsCallback = response => {
         if (response !== null) {
             if (response.status === 'OK') {
                 this.setState({ response });
-                this.addDistanceAndDuration(response);
+                this.getRouteInfo(response);
             } else {
                 console.log('directions response: ', response);
             }
@@ -49,24 +65,44 @@ class Map extends Component {
     }
 
     changeTransportationState = ({ target: { value } }) => {
-        this.setState({ renderResponse: null, travelMode: value });
+        this.setState({ travelMode: value });
     }
 
     onMapClick = (...args) => console.log('onClick args: ', args);
 
     render() {
-        console.log("Render");
-        if (this.state.response !== null) {
-            console.log("Response: ", this.state.response.routes[0].legs);
-        }
+        console.log("Response: ", this.state.response);
+        var minutes = Math.round(this.state.totalDuration / 60);
+        var hours = this.state.totalDuration / 60 / 60;
+
+        var miles = this.state.totalDistance * 0.00062137;
+        var feet = Math.round(miles * 5280);
+
+        console.log("Distance in miles: ", miles, "mi");
+        console.log("Distance in feet: ", feet, "ft");
+
         return (
             <div>
-                <h6>Distance: {Math.round(this.state.totalDistance * 0.00062137)} mi</h6>
-                <h6>ETA: {Math.round((this.state.totalDuration / 60 >= 60) ?
-                    (this.state.totalDuration / 60 / 60) : (this.state.totalDuration / 60))} 
-                    {(this.state.totalDuration / 60 >= 60) ? (" h") : (" min")}</h6>
+                <h6>{this.state.directionSummary}</h6>
+                <h6>Distance: {(feet >= 5280) ? (Math.round(this.state.totalDistance * 0.00062137) + " mi") : (feet + " ft")}</h6>
+                <h6>ETA: {(minutes >= 60) ? Math.floor(hours) : minutes}
+                    {(minutes >= 60) ? (" h ") : (" min ")}
+                    {(minutes > 60) && (Math.round((hours - Math.floor(hours)) * 60) + " min")}</h6>
                 <div className='map'>
                     <div className='map-settings'>
+
+                        {/* <span><p>Traffic</p> <Switch
+                            offLabel="Off"
+                            onChange={this.switchTrafficLayer}
+                            onLabel="On"
+                        /></span>
+
+                        <span><p>Transit</p> <Switch
+                            offLabel="Off"
+                            onChange={this.switchTransitLayer}
+                            onLabel="On"
+                        /></span> */}
+
                         <Select
                             multiple={false}
                             label="select transportation"
@@ -153,25 +189,29 @@ class Map extends Component {
 
                                 {
                                     (this.state.response !== null) && (
-                                        <DirectionsRenderer
-                                            // required
-                                            options={{
-                                                directions: this.state.response
-                                            }}
-                                            // optional
-                                            onLoad={directionsRenderer => {
-                                                let tempRender = directionsRenderer;
-                                                console.log("Temp render: ", tempRender);
-                                                this.setState({renderResponse: tempRender});
-                                                console.log("Render response: ", this.state.renderResponse);
-                                                console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer)
-                                            }}
-                                            // optional
-                                            onUnmount={directionsRenderer => {
-                                                this.setState({renderResponse: null});
-                                                console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
-                                            }}
-                                        />
+                                        <div>
+                                            <DirectionsRenderer
+                                                // required
+                                                options={{
+                                                    directions: this.state.response
+                                                }}
+                                                // optional
+                                                onLoad={directionsRenderer => {
+                                                    console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer)
+                                                }}
+                                                // optional
+                                                onUnmount={directionsRenderer => {
+                                                    console.log('DirectionsRenderer onUnmount directionsRenderer: ', directionsRenderer)
+                                                }}
+                                            />
+                                            {this.state.trafficLayer &&
+                                                <TrafficLayer />
+                                            }
+
+                                            {/* {this.state.transitLayer &&
+                                                <TransitLayer />
+                                            } */}
+                                        </div>
                                     )
                                 }
                             </GoogleMap>

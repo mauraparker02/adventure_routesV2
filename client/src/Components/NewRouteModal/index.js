@@ -28,7 +28,8 @@ class NewRouteModal extends Component {
                 trigger={this.props.trigger}
                 header={(this.state.modalPage) ? "New Route" : this.state.name}
                 options={{
-                    dismissible: false
+                    dismissible: false,
+                    onCloseEnd: () => this.setState({modalPage: true})
                 }}
             >
                 {(this.state.modalPage) ? (
