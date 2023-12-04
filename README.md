@@ -1,6 +1,6 @@
 # Project 3: Adventure Routes 2.0
 
-NOTE: This app has been deprecated. Please use [adventure-routes-v3](https://github.com/ThaNinjaPower/adventure-routes-v3) instead.
+NOTE: This app has been deprecated. Please use [adventure-routes-v3](https://github.com/kevinvnguyen97/adventure-routes-v3) instead.
 
 This app will map out a user’s journey from point A to point B with two stops in between. A user comes to our page and has capability to build a route and map it out visually.
 
